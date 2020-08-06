@@ -50,7 +50,7 @@ public class TaskController {
         dbService.deleteTaskById(taskId);
     }
 
-    @RequestMapping(method = {RequestMethod.PATCH}, value = "updateTask", consumes = {"text/plain", "application/*"})
+    @RequestMapping(method = {RequestMethod.PUT}, value = "updateTask", consumes = {"text/plain", "application/*"})
     public TaskDto updateTask(@RequestBody TaskDto taskDto) {
         return taskMapper.mapToTaskDto(dbService.saveTask(taskMapper.mapToTask(taskDto)));
     }
