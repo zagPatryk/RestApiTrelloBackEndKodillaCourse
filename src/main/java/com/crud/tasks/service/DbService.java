@@ -1,12 +1,10 @@
 package com.crud.tasks.service;
 
-import com.crud.tasks.controller.TaskNotFoundException;
 import com.crud.tasks.domain.Task;
 import com.crud.tasks.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Iterator;
 import java.util.Optional;
 
 @Service
@@ -33,6 +31,7 @@ public class DbService {
     public void deleteTaskById(Long taskId) {
         taskRepository.deleteById(taskId);
     }
+
     public void deleteTask(final Task task) {
         taskRepository.delete(task);
     }

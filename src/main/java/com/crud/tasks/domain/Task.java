@@ -12,6 +12,7 @@ import javax.persistence.*;
 @EqualsAndHashCode
 @Entity(name = "tasks")
 public class Task {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull
