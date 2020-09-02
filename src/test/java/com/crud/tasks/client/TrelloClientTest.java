@@ -83,7 +83,7 @@ public class TrelloClientTest {
                 "test_id");
 
         URI url = UriComponentsBuilder.fromHttpUrl(trelloConfig.getTrelloApiEndpoint() + "/cards/")
-                .queryParam("key", trelloConfig.getTrelloApiEndpoint())
+                .queryParam("key", trelloConfig.getTrelloAppKey())
                 .queryParam("token", trelloConfig.getTrelloToken())
                 .queryParam("name", trelloCardDto.getName())
                 .queryParam("desc", trelloCardDto.getDes())
@@ -101,11 +101,9 @@ public class TrelloClientTest {
         when(restTemplate.postForObject(url,null, CreatedTrelloCard.class)).thenReturn(createdTrelloCard);
 
         // When
-
         CreatedTrelloCard newCard = trelloClient.createNewCard(trelloCardDto);
 
         // Then
-
         assertEquals("Test Id", newCard.getId());
         assertEquals("Test task", newCard.getName());
         assertEquals("http://test.com", newCard.getShortUrl());

@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -27,7 +25,7 @@ public class TaskController {
     }
 
     @RequestMapping(method = {RequestMethod.POST}, value = "createTask")
-    public void createTask(TaskDto taskDto) {
+    public void createTask(@RequestBody TaskDto taskDto) {
         dbService.saveTask(taskMapper.mapToTask(taskDto));
     }
 
