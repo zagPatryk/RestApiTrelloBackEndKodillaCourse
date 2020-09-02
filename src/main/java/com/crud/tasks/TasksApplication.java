@@ -6,26 +6,24 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 
-
-//@SpringBootApplication/*(scanBasePackages={"com.crud.tasks.repository","com.crud.tasks.service"
-//        ,"com.crud.tasks.controller","com.crud.tasks.domain","com.crud.tasks.mapper"})*/
-//public class TasksApplication {
-//    public static void main(String[] args) {
-//        SpringApplication.run(TasksApplication.class, args);
-//    }
-//}
-
-
-
-
-@SpringBootApplication
-public class TasksApplication extends SpringBootServletInitializer {
+// heroku
+@SpringBootApplication/*(scanBasePackages={"com.crud.tasks.repository","com.crud.tasks.service"
+        ,"com.crud.tasks.controller","com.crud.tasks.domain","com.crud.tasks.mapper"})*/
+public class TasksApplication {
     public static void main(String[] args) {
         SpringApplication.run(TasksApplication.class, args);
     }
-
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(TasksApplication.class);
-    }
 }
+
+// local
+//@SpringBootApplication
+//public class TasksApplication extends SpringBootServletInitializer {
+//    public static void main(String[] args) {
+//        SpringApplication.run(TasksApplication.class, args);
+//    }
+//
+//    @Override
+//    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+//        return application.sources(TasksApplication.class);
+//    }
+//}
