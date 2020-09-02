@@ -4,7 +4,7 @@ plugins {
     id 'java'
 
     // local
-//    id 'war'
+    id 'war'
 }
 
 group = 'com.crud'
@@ -26,12 +26,15 @@ dependencies {
     testCompile('junit:junit:4.12')
     testCompile('org.mockito:mockito-all:1.10.19')
 
+    compile('io.springfox:springfox-swagger2:2.7.0')
+    compile('io.springfox:springfox-swagger-ui:2.7.0')
+
     // heroku
-    compile('org.postgresql:postgresql')
+//    compile('org.postgresql:postgresql')
 
     // local
-//    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.21'
-//    providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.21'
+    providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
 }
 
 test {
