@@ -6,7 +6,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 
-// heroku
+//// heroku
 //@SpringBootApplication/*(scanBasePackages={"com.crud.tasks.repository","com.crud.tasks.service"
 //        ,"com.crud.tasks.controller","com.crud.tasks.domain","com.crud.tasks.mapper"})*/
 //public class TasksApplication {

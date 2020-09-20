@@ -5,12 +5,10 @@ import com.crud.tasks.domain.TrelloCardDto;
 import com.crud.tasks.domain.response.CreatedTrelloCard;
 import com.crud.tasks.domain.response.TrelloBadges;
 import com.crud.tasks.trello.config.TrelloConfig;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -23,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
-@RunWith(MockitoJUnitRunner.class)
+//@RunWith(MockitoJUnitRunner.class)
 public class TrelloClientTest {
 
     @InjectMocks
@@ -35,7 +33,7 @@ public class TrelloClientTest {
     @Mock
     private TrelloConfig trelloConfig;
 
-    @Before
+    @BeforeEach
     public void init() {
         when(trelloConfig.getTrelloApiEndpoint()).thenReturn("http://test.com");
         when(trelloConfig.getTrelloAppKey()).thenReturn("test");
@@ -44,20 +42,9 @@ public class TrelloClientTest {
 
     @Test
     public void shouldFetchTrelloBoards() {
-        // adnotacja @Before nie działa mi przed wywołaniem jej ręcznie tutaj <================================
-        init();
-
         // Given
         TrelloBoardDto[] trelloBoards = new TrelloBoardDto[1];
         trelloBoards[0] = new TrelloBoardDto("test_id", "test_board", new ArrayList<>());
-
-        // nie było sensu dodawać when dla key i tokena jeżeli wkleja się gotowy link
-        // a skoro są dodane to funkcja z metody zadziała dobrze
-        // ten test w formie z kursu cokolwiek sprawdzał? Czy wyrzucał po prostu 'zakończono' ze sztucznymi rezultatami?
-        // https://kodilla.com/static/bootcamp-java/java-18_108.png
-//        URI uri = new URI("http://test.com/members/5efdff5f0d223a4f42d58389/" +
-//                "boards?key=test&token=test&fields=name,id&lists=all");
-
         when(restTemplate.getForObject(trelloClient.getUrlForTrelloBoards(), TrelloBoardDto[].class)).thenReturn(trelloBoards);
 
         // When
@@ -72,9 +59,6 @@ public class TrelloClientTest {
 
     @Test
     public void shouldCreateCard() {
-        // adnotacja @Before nie działa mi przed wywołaniem jej ręcznie tutaj <================================
-        init();
-
         // Given
         TrelloCardDto trelloCardDto = new TrelloCardDto(
                 "Test task",
@@ -90,15 +74,13 @@ public class TrelloClientTest {
                 .queryParam("pos", trelloCardDto.getPos())
                 .queryParam("idList", trelloCardDto.getListId()).build().encode().toUri();
 
-        // nie uwzględnia zmian które były w zadaniu do poprzednich rozdziałów i trzeba dodać ręcznie
         CreatedTrelloCard createdTrelloCard = new CreatedTrelloCard(
                 "Test Id",
                 "Test task",
                 "http://test.com",
                 new TrelloBadges()
         );
-
-        when(restTemplate.postForObject(url,null, CreatedTrelloCard.class)).thenReturn(createdTrelloCard);
+        when(restTemplate.postForObject(url, null, CreatedTrelloCard.class)).thenReturn(createdTrelloCard);
 
         // When
         CreatedTrelloCard newCard = trelloClient.createNewCard(trelloCardDto);
@@ -111,9 +93,6 @@ public class TrelloClientTest {
 
     @Test
     public void shouldReturnEmptyList() {
-        // adnotacja @Before nie działa mi przed wywołaniem jej ręcznie tutaj <================================
-        init();
-
         // Given
         TrelloBoardDto[] trelloBoards = new TrelloBoardDto[0];
         when(restTemplate.getForObject(trelloClient.getUrlForTrelloBoards(), TrelloBoardDto[].class)).thenReturn(null);

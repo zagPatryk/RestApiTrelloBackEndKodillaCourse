@@ -32,7 +32,7 @@ public class TaskController {
     @RequestMapping(method = RequestMethod.GET, value = "getTasks")
     public List<TaskDto> getAllTasks() {
         List<Task> list = new ArrayList<>();
-        for(Task task : dbService.getAllTasks()) {
+        for (Task task : dbService.getAllTasks()) {
             list.add(task);
         }
         return taskMapper.mapTaskDtoList(list);

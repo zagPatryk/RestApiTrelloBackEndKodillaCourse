@@ -1,11 +1,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>CRUD</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i&subset=latin-ext" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i&subset=latin-ext"
+          rel="stylesheet">
 </head>
 <body>
 <h1 class="kodilla-heading kodilla-heading--main">Kodilla CRUD App</h1>
@@ -50,7 +52,8 @@
             <label class="datatable__input-label">
                 Task name
             </label>
-            <input type="text" name="title" placeholder="Insert a new task name" data-task-name-input required minlength="3">
+            <input type="text" name="title" placeholder="Insert a new task name" data-task-name-input required
+                   minlength="3">
             <p class="datatable__field-value" data-task-name-paragraph></p>
         </fieldset>
 
@@ -58,14 +61,19 @@
             <label class="datatable__input-label">
                 Task content
             </label>
-            <textarea name="title" placeholder="Insert new task content" data-task-content-input required minlength="3"></textarea>
+            <textarea name="title" placeholder="Insert new task content" data-task-content-input required
+                      minlength="3"></textarea>
             <p class="datatable__field-value" data-task-content-paragraph></p>
         </fieldset>
 
         <div class="datatable__row-section-wrapper">
             <fieldset class="datatable__row-section datatable__row-section--button-section">
-                <button type="button" data-task-submit-update-button class="datatable__button datatable__button--editing ">Submit update</button>
-                <button type="button" data-task-edit-abort-button class="datatable__button datatable__button--editing">Abort update</button>
+                <button type="button" data-task-submit-update-button
+                        class="datatable__button datatable__button--editing ">Submit update
+                </button>
+                <button type="button" data-task-edit-abort-button class="datatable__button datatable__button--editing">
+                    Abort update
+                </button>
                 <button type="button" data-task-edit-button class="datatable__button">Edit</button>
                 <button type="button" data-task-delete-button class="datatable__button">Delete</button>
             </fieldset>
@@ -77,7 +85,8 @@
                 <select class="datatable__select" name="list-name" data-list-name-select>
                     <option disabled selected>--- select a list ---</option>
                 </select>
-                <button type="button" data-trello-card-creation-trigger class="datatable__button datatable__button--card-creation">
+                <button type="button" data-trello-card-creation-trigger
+                        class="datatable__button datatable__button--card-creation">
                     Create a card
                 </button>
             </fieldset>

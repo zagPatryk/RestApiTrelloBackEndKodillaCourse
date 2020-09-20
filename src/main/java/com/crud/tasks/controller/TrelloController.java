@@ -1,9 +1,9 @@
 package com.crud.tasks.controller;
 
-import com.crud.tasks.domain.response.CreatedTrelloCard;
 import com.crud.tasks.domain.TrelloBoardDto;
-import com.crud.tasks.client.TrelloClient;
 import com.crud.tasks.domain.TrelloCardDto;
+import com.crud.tasks.domain.response.CreatedTrelloCard;
+import com.crud.tasks.service.TrelloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,16 +15,21 @@ import java.util.List;
 public class TrelloController {
 
     @Autowired
-    private TrelloClient trelloClient;
+    private TrelloService trelloService;
 
     @RequestMapping(method = RequestMethod.GET, value = "getTrelloBoards")
     public List<TrelloBoardDto> getTrelloBoards() {
-        return trelloClient.getTrelloBoards();
+        return trelloService.fetchTrelloBoards();
+    }
+
+    @PostMapping(value = "createTrelloCard", consumes = {"text/plain", "application/*"})
+    public CreatedTrelloCard createTrelloCard(@RequestBody TrelloCardDto trelloCardDto) {
+        return trelloService.createdTrelloCard(trelloCardDto);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getTrelloBoardsOld")
-    public void getTrelloBoardsOld() {
-        List<TrelloBoardDto> trelloBoards = trelloClient.getTrelloBoards();
+    public List<TrelloBoardDto> getTrelloBoardsOld() {
+        List<TrelloBoardDto> trelloBoards = trelloService.fetchTrelloBoards();
 
         // Challange
         trelloBoards.stream()
@@ -41,10 +46,6 @@ public class TrelloController {
                     System.out.println(trelloList.getName() + " - " + trelloList.getId() + " - " + trelloList.isClosed()));
 
         });
-    }
-
-    @PostMapping(value = "createTrelloCard", consumes = {"text/plain", "application/*"})
-    public CreatedTrelloCard createTrelloCard(@RequestBody TrelloCardDto trelloCardDto) {
-        return trelloClient.createNewCard(trelloCardDto);
+        return trelloBoards;
     }
 }
