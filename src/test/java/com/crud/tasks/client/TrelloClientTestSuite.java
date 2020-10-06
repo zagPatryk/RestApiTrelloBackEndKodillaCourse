@@ -2,7 +2,7 @@ package com.crud.tasks.client;
 
 import com.crud.tasks.domain.TrelloBoardDto;
 import com.crud.tasks.domain.TrelloCardDto;
-import com.crud.tasks.domain.response.CreatedTrelloCard;
+import com.crud.tasks.domain.response.CreatedTrelloCardDto;
 import com.crud.tasks.domain.response.TrelloBadges;
 import com.crud.tasks.trello.config.TrelloConfig;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,8 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
-//@RunWith(MockitoJUnitRunner.class)
-public class TrelloClientTest {
+public class TrelloClientTestSuite {
 
     @InjectMocks
     private TrelloClient trelloClient;
@@ -74,16 +73,16 @@ public class TrelloClientTest {
                 .queryParam("pos", trelloCardDto.getPos())
                 .queryParam("idList", trelloCardDto.getListId()).build().encode().toUri();
 
-        CreatedTrelloCard createdTrelloCard = new CreatedTrelloCard(
+        CreatedTrelloCardDto createdTrelloCardDto = new CreatedTrelloCardDto(
                 "Test Id",
                 "Test task",
                 "http://test.com",
                 new TrelloBadges()
         );
-        when(restTemplate.postForObject(url, null, CreatedTrelloCard.class)).thenReturn(createdTrelloCard);
+        when(restTemplate.postForObject(url, null, CreatedTrelloCardDto.class)).thenReturn(createdTrelloCardDto);
 
         // When
-        CreatedTrelloCard newCard = trelloClient.createNewCard(trelloCardDto);
+        CreatedTrelloCardDto newCard = trelloClient.createNewCard(trelloCardDto);
 
         // Then
         assertEquals("Test Id", newCard.getId());
