@@ -36,12 +36,10 @@ public class TrelloClient {
 
     @Autowired
     private RestTemplate restTemplate;
-
     @Autowired
     private TrelloConfig trelloConfig;
 
     public URI getUrlForTrelloBoards() {
-
         return UriComponentsBuilder.fromHttpUrl(trelloConfig.getTrelloApiEndpoint() + "/members/"
                 + trelloConfig.getTrelloUsername() + "/boards")
                 .queryParam("key", trelloConfig.getTrelloAppKey())
@@ -56,12 +54,10 @@ public class TrelloClient {
         if (boardsResponse != null) {
             return Arrays.asList(boardsResponse);
         }
-
         return new ArrayList<>();
     }
 
     public List<TrelloBoardDto> getTrelloBoards() {
-
         try {
             TrelloBoardDto[] boardsResponse = restTemplate.getForObject(getUrlForTrelloBoards(), TrelloBoardDto[].class);
             return Arrays.asList(ofNullable(boardsResponse).orElse(new TrelloBoardDto[0]));
@@ -79,7 +75,6 @@ public class TrelloClient {
                 .queryParam("desc", trelloCardDto.getDes())
                 .queryParam("pos", trelloCardDto.getPos())
                 .queryParam("idList", trelloCardDto.getListId()).build().encode().toUri();
-
         return restTemplate.postForObject(url, null, CreatedTrelloCardDto.class);
     }
 

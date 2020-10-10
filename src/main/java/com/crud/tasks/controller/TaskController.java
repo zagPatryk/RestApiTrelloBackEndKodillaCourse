@@ -14,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/v1/task")
 public class TaskController {
+
     @Autowired
     private DbService dbService;
     @Autowired
@@ -24,9 +25,9 @@ public class TaskController {
         return taskMapper.mapToTaskDto((dbService.getTaskById(taskId)));
     }
 
-    @RequestMapping(method = {RequestMethod.POST}, value = "createTask")
-    public void createTask(@RequestBody TaskDto taskDto) {
-        dbService.saveTask(taskMapper.mapToTask(taskDto));
+    @RequestMapping(method = {RequestMethod.POST}, value = "createTask", consumes = {"text/plain", "application/*"})
+    public TaskDto createTask(@RequestBody TaskDto taskDto) {
+        return taskMapper.mapToTaskDto(dbService.saveTask(taskMapper.mapToTask(taskDto)));
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getTasks")
@@ -44,8 +45,8 @@ public class TaskController {
     }
 
     @DeleteMapping(value = "deleteTask", consumes = {"text/plain", "application/*"})
-    public void deleteTask(@RequestParam Long taskId) {
-        dbService.deleteTaskById(taskId);
+    public boolean deleteTask(@RequestParam Long taskId) {
+        return dbService.deleteTaskById(taskId);
     }
 
     @RequestMapping(method = {RequestMethod.PUT}, value = "updateTask", consumes = {"text/plain", "application/*"})

@@ -8,7 +8,6 @@ import javax.persistence.*;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @EqualsAndHashCode
 @Entity(name = "tasks")
 public class Task {

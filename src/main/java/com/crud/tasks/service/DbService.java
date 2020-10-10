@@ -9,6 +9,7 @@ import java.util.Optional;
 
 @Service
 public class DbService {
+
     @Autowired
     private TaskRepository taskRepository;
 
@@ -28,11 +29,12 @@ public class DbService {
         return taskRepository.save(task);
     }
 
-    public void deleteTaskById(Long taskId) {
-        taskRepository.deleteById(taskId);
+    public boolean deleteTaskById(Long taskId) {
+        try{
+            taskRepository.deleteById(taskId);
+        } catch (IllegalArgumentException exception) {
+            return false;
+        } return true;
     }
 
-    public void deleteTask(final Task task) {
-        taskRepository.delete(task);
-    }
 }
