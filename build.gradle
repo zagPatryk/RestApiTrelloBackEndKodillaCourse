@@ -32,6 +32,7 @@ dependencies {
     compile('io.springfox:springfox-swagger-ui:2.7.0')
 
     compile('org.springframework.boot:spring-boot-starter-mail')
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '2.3.4.RELEASE'
 
     // heroku
 //    compile('org.postgresql:postgresql')
