@@ -34,8 +34,10 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-mail')
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '2.3.4.RELEASE'
 
+    compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+
     // heroku
-//    compile('org.postgresql:postgresql')
+    //compile('org.postgresql:postgresql')
 
     // local
     compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.21'
