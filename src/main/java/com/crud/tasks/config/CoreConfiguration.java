@@ -20,7 +20,6 @@ public class CoreConfiguration implements WebMvcConfigurer {
     @Bean
     public RestTemplate restTemplate() {
         return new RestTemplate();
-
     }
 
     @Bean
