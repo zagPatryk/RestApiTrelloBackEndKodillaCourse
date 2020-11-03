@@ -31,7 +31,7 @@ public class SimpleEmailService {
         }
     }
 
-    private MimeMessagePreparator createMimeMessage(final Mail mail, MailType mailType) {
+    public MimeMessagePreparator createMimeMessage(final Mail mail, MailType mailType) {
         return mimeMessage -> {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
             messageHelper.setTo(mail.getMailTo());

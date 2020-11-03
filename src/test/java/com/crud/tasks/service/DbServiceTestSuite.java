@@ -1,5 +1,6 @@
 package com.crud.tasks.service;
 
+import com.crud.tasks.controller.TaskNotFoundException;
 import com.crud.tasks.domain.Task;
 import com.crud.tasks.repository.TaskRepository;
 import org.junit.Test;
@@ -42,13 +43,13 @@ public class DbServiceTestSuite {
     }
 
     @Test
-    public void getTaskById() {
+    public void getTaskById() throws TaskNotFoundException {
         //Given
         Task task = new Task();
         taskRepository.save(task);
 
         //When
-        Task loadedTask = dbService.getTaskById(task.getId());
+        Task loadedTask = dbService.getTask(task.getId()).orElseThrow(TaskNotFoundException::new);
 
         //Then
         assertEquals(loadedTask, task);
@@ -58,13 +59,13 @@ public class DbServiceTestSuite {
     }
 
     @Test
-    public void getTask() {
+    public void getTask() throws TaskNotFoundException {
         //Given
         Task task = new Task();
         taskRepository.save(task);
 
         //When
-        Task loadedTask = dbService.getTaskById(task.getId());
+        Task loadedTask = dbService.getTask(task.getId()).orElseThrow(TaskNotFoundException::new);
 
         //Then
         assertEquals(loadedTask, task);
@@ -74,7 +75,7 @@ public class DbServiceTestSuite {
     }
 
     @Test
-    public void saveTask() {
+    public void saveTask() throws TaskNotFoundException  {
         //Given
         Task task = new Task();
 
@@ -82,7 +83,7 @@ public class DbServiceTestSuite {
         dbService.saveTask(task);
 
         //Then
-        assertEquals(dbService.getTaskById(task.getId()), task);
+        assertEquals(dbService.getTask(task.getId()).orElseThrow(TaskNotFoundException::new), task);
 
         //Cleanup
         taskRepository.deleteById(task.getId());

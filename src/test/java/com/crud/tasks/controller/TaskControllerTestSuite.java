@@ -36,34 +36,6 @@ public class TaskControllerTestSuite {
     private TaskMapper taskMapper;
 
     @Test
-    public void getTaskById() throws Exception {
-        //Given
-        Task task = new Task(
-                1L,
-                "title",
-                "content"
-        );
-
-        TaskDto taskDto = new TaskDto(
-                1L,
-                "title",
-                "content"
-        );
-
-        when(dbService.getTaskById(1)).thenReturn(task);
-        when(taskMapper.mapToTaskDto(task)).thenReturn(taskDto);
-
-        //When & Then
-        mockMvc.perform(get("/v1/task/getTaskById")
-                .contentType(MediaType.APPLICATION_JSON)
-                .param("taskId", "1"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", is(1)))
-                .andExpect(jsonPath("$.title", is("title")))
-                .andExpect(jsonPath("$.content", is("content")));
-    }
-
-    @Test
     public void createTask() throws Exception {
         //Given
         Task task = new Task(
@@ -86,7 +58,7 @@ public class TaskControllerTestSuite {
         String jsonTaskDto = gson.toJson(taskDto);
 
         //When & Then
-        mockMvc.perform(post("/v1/task/createTask")
+        mockMvc.perform(post("/v1/tasks/")
                 .contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding("UTF-8")
                 .content(jsonTaskDto))
@@ -109,7 +81,7 @@ public class TaskControllerTestSuite {
         when(taskMapper.mapTaskDtoList(taskList)).thenReturn(taskDtoList);
 
         //When & Then
-        mockMvc.perform(get("/v1/task/getTasks")
+        mockMvc.perform(get("/v1/tasks")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id", is(1)))
@@ -136,8 +108,7 @@ public class TaskControllerTestSuite {
         when(taskMapper.mapToTaskDto(task)).thenReturn(taskDto);
 
         //When & Then
-        mockMvc.perform(get("/v1/task/getTask").contentType(MediaType.APPLICATION_JSON)
-                .param("taskId", "1"))
+        mockMvc.perform(get("/v1/tasks/{taskId}", "1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))
                 .andExpect(jsonPath("$.title", is("title")))
@@ -151,13 +122,13 @@ public class TaskControllerTestSuite {
         when(dbService.deleteTaskById(2L)).thenReturn(false);
 
         //When & Then
-        mockMvc.perform(delete("/v1/task/deleteTask")
+        mockMvc.perform(delete("/v1/tasks/{taskId}", "1")
                 .contentType(MediaType.APPLICATION_JSON)
                 .param("taskId", "1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", is(true)));
 
-        mockMvc.perform(delete("/v1/task/deleteTask")
+        mockMvc.perform(delete("/v1/tasks/{taskId}", "2")
                 .contentType(MediaType.APPLICATION_JSON)
                 .param("taskId", "2"))
                 .andExpect(status().isOk())
@@ -187,7 +158,7 @@ public class TaskControllerTestSuite {
         String jsonTaskDto = gson.toJson(taskDto);
 
         //When & Then
-        mockMvc.perform(put("/v1/task/updateTask")
+        mockMvc.perform(put("/v1/tasks")
                 .contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding("UTF-8")
                 .content(jsonTaskDto))

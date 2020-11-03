@@ -7,11 +7,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 @RunWith(MockitoJUnitRunner.class)
@@ -19,36 +19,40 @@ public class SimpleEmailServiceTest {
 
     @InjectMocks
     private SimpleEmailService simpleEmailService;
-
     @Mock
     private JavaMailSender javaMailSender;
+    @Mock
+    private MailCreatorService mailCreatorService;
 
     @Test // poprawić
     public void shouldSendEmail() {
         // Given
-        Mail mail1 = new Mail("mailtestingtarget@gmail.com",
+        Mail mail = new Mail("mailtestingtarget@gmail.com",
                 "Test subj", "Test mail", "x@xs.xx")  ;
-        Mail mail2 = new Mail("mailtestingtarget@gmail.com",
-                "Test subj", "Test mail")  ;
 
-        SimpleMailMessage mailMessage1 = new SimpleMailMessage();
-        mailMessage1.setTo(mail1.getMailTo());
-        mailMessage1.setSubject(mail1.getSubject());
-        mailMessage1.setText(mail1.getMessage());
-        mailMessage1.setCc(mail1.getCc());
+        MimeMessagePreparator mimeMessage1 = mimeMessage -> {
+            MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
+            messageHelper.setTo(mail.getMailTo());
+            messageHelper.setSubject(mail.getSubject());
+            messageHelper.setText(mailCreatorService.buildTrelloCardEmail(mail.getMessage()), true);
+        };
 
-        SimpleMailMessage mailMessage2 = new SimpleMailMessage();
-        mailMessage2.setTo(mail2.getMailTo());
-        mailMessage2.setSubject(mail2.getSubject());
-        mailMessage2.setText(mail2.getMessage());
-        mailMessage2.setCc(mail1.getCc());
+        MimeMessagePreparator mimeMessage2 = mimeMessage -> {
+            MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
+            messageHelper.setTo(mail.getMailTo());
+            messageHelper.setSubject(mail.getSubject());
+            messageHelper.setText(mailCreatorService.buildTrelloInformationEmail(mail.getMessage()), true);
+        };
+
+        when(mailCreatorService.buildTrelloCardEmail(mail.getMessage())).thenReturn("Card");
+        when(mailCreatorService.buildTrelloInformationEmail(mail.getMessage())).thenReturn("Info");
 
         // When
-        simpleEmailService.send(mail1, MailType.NEW_CARD_TRELLO);
-        simpleEmailService.send(mail2, MailType.INFORMATION);
+        simpleEmailService.send(mail, MailType.NEW_CARD_TRELLO);
+        simpleEmailService.send(mail, MailType.INFORMATION);
 
         // Then
-        verify(javaMailSender, times(1)).send(mailMessage1);
-        verify(javaMailSender, times(1)).send(mailMessage2);
+        verify(javaMailSender, times(1)).send(mimeMessage1);
+        verify(javaMailSender, times(1)).send(mimeMessage2);
     }
 }
