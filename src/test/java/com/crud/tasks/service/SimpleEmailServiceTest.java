@@ -44,8 +44,8 @@ public class SimpleEmailServiceTest {
         mailMessage2.setCc(mail1.getCc());
 
         // When
-        simpleEmailService.send(mail1);
-        simpleEmailService.send(mail2);
+        simpleEmailService.send(mail1, MailType.NEW_CARD_TRELLO);
+        simpleEmailService.send(mail2, MailType.NEW_CARD_TRELLO);
 
         // Then
         verify(javaMailSender, times(1)).send(mailMessage1);

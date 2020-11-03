@@ -19,17 +19,8 @@ import java.util.List;
 
 import static java.util.Optional.ofNullable;
 
-
 @Component
 public class TrelloClient {
-
-    @Override
-    public String toString() {
-        return "TrelloClient{" +
-                "restTemplate=" + restTemplate +
-                ", trelloConfig=" + trelloConfig +
-                '}';
-    }
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TrelloClient.class);
 
@@ -77,4 +68,11 @@ public class TrelloClient {
         return restTemplate.postForObject(url, null, CreatedTrelloCardDto.class);
     }
 
+    @Override
+    public String toString() {
+        return "TrelloClient{" +
+                "restTemplate=" + restTemplate +
+                ", trelloConfig=" + trelloConfig +
+                '}';
+    }
 }
