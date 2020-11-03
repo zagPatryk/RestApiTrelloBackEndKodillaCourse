@@ -23,7 +23,7 @@ public class SimpleEmailServiceTest {
     @Mock
     private JavaMailSender javaMailSender;
 
-    @Test
+    @Test // poprawić
     public void shouldSendEmail() {
         // Given
         Mail mail1 = new Mail("mailtestingtarget@gmail.com",
@@ -45,7 +45,7 @@ public class SimpleEmailServiceTest {
 
         // When
         simpleEmailService.send(mail1, MailType.NEW_CARD_TRELLO);
-        simpleEmailService.send(mail2, MailType.NEW_CARD_TRELLO);
+        simpleEmailService.send(mail2, MailType.INFORMATION);
 
         // Then
         verify(javaMailSender, times(1)).send(mailMessage1);
