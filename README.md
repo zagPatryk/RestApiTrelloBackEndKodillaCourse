@@ -7,3 +7,11 @@ https://zagpatryk.github.io/
 
 For backend go to:
 https://blooming-savannah-27502.herokuapp.com/
+
+- Main: Java, Spring, SpringBoot, Hibernate
+- Additional: SQL, basic HTML&CSS
+- For testing: JUnit4, Mockito, Selenium
+- App builder: Gradle
+- Version control: Git
+- DataBases: MySQL, PostgreSQL for Heroku
+- Additionally used: lombok, thymeleaf
