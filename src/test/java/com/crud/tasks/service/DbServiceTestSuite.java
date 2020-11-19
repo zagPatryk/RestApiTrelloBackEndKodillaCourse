@@ -18,7 +18,6 @@ import static org.junit.Assert.assertFalse;
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class DbServiceTestSuite {
-
     @Autowired
     private DbService dbService;
     @Autowired

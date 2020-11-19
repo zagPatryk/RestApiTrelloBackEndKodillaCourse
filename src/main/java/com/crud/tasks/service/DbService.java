@@ -11,7 +11,6 @@ import java.util.Optional;
 
 @Service
 public class DbService {
-
     @Autowired
     private TaskRepository taskRepository;
 
@@ -38,5 +37,4 @@ public class DbService {
             return false;
         } return true;
     }
-
 }

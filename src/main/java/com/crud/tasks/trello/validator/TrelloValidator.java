@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 
 @Component
 public class TrelloValidator {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(TrelloFacade.class);
 
     public void validateCard(final TrelloCard trelloCard) {
@@ -31,5 +30,4 @@ public class TrelloValidator {
         LOGGER.info("Board habe been filtered. Size: " + filteredBoards.size());
         return filteredBoards;
     }
-
 }

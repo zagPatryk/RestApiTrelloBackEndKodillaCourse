@@ -21,7 +21,6 @@ import static java.util.Optional.ofNullable;
 
 @Component
 public class TrelloClient {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(TrelloClient.class);
 
     @Autowired
@@ -36,15 +35,6 @@ public class TrelloClient {
                 .queryParam("token", trelloConfig.getTrelloToken())
                 .queryParam("fields", "name,id")
                 .queryParam("lists", "all").build().encode().toUri();
-    }
-
-    public List<TrelloBoardDto> getTrelloBoardsOld() {
-        TrelloBoardDto[] boardsResponse = restTemplate.getForObject(getUrlForTrelloBoards(), TrelloBoardDto[].class);
-
-        if (boardsResponse != null) {
-            return Arrays.asList(boardsResponse);
-        }
-        return new ArrayList<>();
     }
 
     public List<TrelloBoardDto> getTrelloBoards() {
@@ -68,11 +58,13 @@ public class TrelloClient {
         return restTemplate.postForObject(url, null, CreatedTrelloCardDto.class);
     }
 
-    @Override
-    public String toString() {
-        return "TrelloClient{" +
-                "restTemplate=" + restTemplate +
-                ", trelloConfig=" + trelloConfig +
-                '}';
-    }
+//  // Old code
+//    public List<TrelloBoardDto> getTrelloBoardsOld() {
+//        TrelloBoardDto[] boardsResponse = restTemplate.getForObject(getUrlForTrelloBoards(), TrelloBoardDto[].class);
+//
+//        if (boardsResponse != null) {
+//            return Arrays.asList(boardsResponse);
+//        }
+//        return new ArrayList<>();
+//    }
 }

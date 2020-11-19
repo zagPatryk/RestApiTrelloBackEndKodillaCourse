@@ -22,7 +22,6 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TrelloFacadeTestSuite {
-
     @Mock
     private TrelloService trelloService;
     @Mock
@@ -99,10 +98,5 @@ public class TrelloFacadeTestSuite {
                 assertFalse(trelloListDto.isClosed());
             });
         });
-    }
-
-    @Test
-    public void testCreateCard() {
-
     }
 }

@@ -15,7 +15,6 @@ import static java.util.Optional.ofNullable;
 
 @Service
 public class TrelloService {
-
     @Autowired
     private TrelloClient trelloClient;
     @Autowired

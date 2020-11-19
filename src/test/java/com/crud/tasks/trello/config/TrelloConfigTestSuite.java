@@ -11,7 +11,6 @@ import static org.junit.Assert.*;
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class TrelloConfigTestSuite {
-
     @Autowired
     private TrelloConfig trelloConfig;
 

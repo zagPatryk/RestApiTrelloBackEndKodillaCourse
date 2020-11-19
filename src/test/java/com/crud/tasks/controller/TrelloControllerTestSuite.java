@@ -30,10 +30,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @WebMvcTest(TrelloController.class)
 public class TrelloControllerTestSuite {
-
     @Autowired
     private MockMvc mockMvc;
-
     @MockBean
     private TrelloFacade trelloFacade;
 

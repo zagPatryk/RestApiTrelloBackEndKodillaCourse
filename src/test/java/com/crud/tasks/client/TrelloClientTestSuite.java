@@ -22,13 +22,10 @@ import static org.mockito.Mockito.when;
 
 @SpringBootTest
 public class TrelloClientTestSuite {
-
     @InjectMocks
     private TrelloClient trelloClient;
-
     @Mock
     private RestTemplate restTemplate;
-
     @Mock
     private TrelloConfig trelloConfig;
 

@@ -29,8 +29,10 @@ public class TrelloMapperTestSuite {
         trelloListsDto.add(trelloListDto1);
         trelloListsDto.add(trelloListDto2);
         trelloListsDto.add(trelloListDto3);
+
         //When
         List<TrelloList> trelloLists = trelloMapper.mapToLists(trelloListsDto);
+
         //Then
         assertEquals(trelloLists.get(0).getId(),trelloListDto1.getId());
         assertEquals(trelloLists.get(1).getId(),trelloListDto2.getId());
@@ -53,8 +55,10 @@ public class TrelloMapperTestSuite {
         trelloLists.add(trelloList1);
         trelloLists.add(trelloList2);
         trelloLists.add(trelloList3);
+
         //When
         List<TrelloListDto> trelloListsDto = trelloMapper.mapToListsDto(trelloLists);
+
         //Then
         assertEquals(trelloListsDto.get(0).getId(),trelloList1.getId());
         assertEquals(trelloListsDto.get(1).getId(),trelloList2.getId());
@@ -86,8 +90,10 @@ public class TrelloMapperTestSuite {
         TrelloBoardDto trelloBoardDto2 = new TrelloBoardDto("idb2", "nameb2", trelloListsDto2);
         trelloBoardsDto.add(trelloBoardDto1);
         trelloBoardsDto.add(trelloBoardDto2);
+
         //When
         List<TrelloBoard> trelloBoards = trelloMapper.mapToBoards(trelloBoardsDto);
+
         //Then
         assertEquals(trelloBoards.get(0).getId(),trelloBoardDto1.getId());
         assertEquals(trelloBoards.get(1).getId(),trelloBoardDto2.getId());
@@ -116,8 +122,10 @@ public class TrelloMapperTestSuite {
         TrelloBoard trelloBoard2 = new TrelloBoard("idb2", "nameb2", trelloLists2);
         trelloBoards.add(trelloBoard1);
         trelloBoards.add(trelloBoard2);
+
         //When
         List<TrelloBoardDto> trelloBoardsDto = trelloMapper.mapToBoardsDto(trelloBoards);
+
         //Then
         assertEquals(trelloBoardsDto.get(0).getId(),trelloBoard1.getId());
         assertEquals(trelloBoardsDto.get(1).getId(),trelloBoard2.getId());
@@ -131,8 +139,10 @@ public class TrelloMapperTestSuite {
     public void testMapToCardDto() {
         //Given
         TrelloCard trelloCard = new TrelloCard("n1", "d1", "p1", "id1");
+
         //When
         TrelloCardDto trelloCardDto = trelloMapper.mapToCardDto(trelloCard);
+
         //Then
         assertEquals(trelloCardDto.getName(),trelloCard.getName());
         assertEquals(trelloCardDto.getDes(),trelloCard.getDescription());
@@ -144,8 +154,10 @@ public class TrelloMapperTestSuite {
     public void testMapToCard() {
         //Given
         TrelloCardDto trelloCardDto = new TrelloCardDto("n1", "d1", "p1", "id1");
+
         //When
         TrelloCard trelloCard = trelloMapper.mapToCard(trelloCardDto);
+
         //Then
         assertEquals(trelloCardDto.getName(),trelloCard.getName());
         assertEquals(trelloCardDto.getDes(),trelloCard.getDescription());

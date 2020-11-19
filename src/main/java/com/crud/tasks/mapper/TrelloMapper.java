@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 
 @Component
 public class TrelloMapper {
-
     public List<TrelloList> mapToLists(final List<TrelloListDto> trelloListsDto) {
         return trelloListsDto.stream()
                 .map(trelloList -> new TrelloList(trelloList.getId(), trelloList.getName(), trelloList.isClosed()))

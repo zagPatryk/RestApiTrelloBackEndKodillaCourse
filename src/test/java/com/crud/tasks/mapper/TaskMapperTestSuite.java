@@ -16,10 +16,8 @@ import static org.junit.Assert.assertEquals;
 @SpringBootTest
 @RunWith(MockitoJUnitRunner.class)
 public class TaskMapperTestSuite {
-
     @InjectMocks
     private TaskMapper taskMapper;
-
     @Test
     public void mapToTask() {
         //Given
